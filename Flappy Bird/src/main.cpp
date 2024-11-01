@@ -7,16 +7,20 @@
 #include "Engine/engine.h"
 #include "Scenes/menus.h"
 #include "Scenes/scene.h"
+#include "GamePlay/Manager/gameManager.h"
 #include "GamePlay/Entities/player.h"
 #include "GamePlay/Entities/pipe.h"
+#include <iostream>
 
 int main()
 {
+	bool pause = false;
+
 	Player::Player player = {};
 
 	std::list<Pipe::PipeSet> pipeSets = {};
 
-	float timer = 0;
+	float spawmTimer = 0;
 
 	Menus gameState = Menus::MainMenu;
 	Menus previusMenu = Menus::MainMenu;
@@ -35,25 +39,64 @@ int main()
 	{
 		float deltaTime = GetFrameTime();
 
-		if (!player.collide && gameState == Menus::Playing)
+		switch (gameState)
 		{
-			if (timer <= 0)
-			{
-				pipeSets.push_back(Pipe::Creator());
-				timer = 6;
-			}
-			else
-				timer -= deltaTime;
+		case Menus::MainMenu:
 
-			for (auto& pipeSetIt : pipeSets)
+			if (IsKeyPressed(KEY_ESCAPE))
+				gameState = Menus::WantToExit;
+			break;
+
+		case Menus::WantToExit:
+
+			if (IsKeyPressed(KEY_ESCAPE))
+				gameState = previusMenu;
+			break;
+
+		case Menus::Rules:
+		case Menus::Credits:
+
+			if (IsKeyPressed(KEY_ESCAPE))
+				gameState = Menus::MainMenu;
+			break;
+		case Menus::Playing:
+
+			previusMenu = Menus::Playing;
+
+			if (!player.collide && gameState == Menus::Playing)
 			{
-				Pipe::Movement(pipeSetIt, deltaTime);
+
+				std::cout << pause << "\n";
+
+				if (IsKeyPressed(KEY_ESCAPE))
+					pause = !pause;
+
+				if (!pause)
+				{
+					if (spawmTimer <= 0)
+					{
+						pipeSets.push_back(Pipe::Creator());
+						spawmTimer = 6;
+					}
+					else
+						spawmTimer -= deltaTime;
+
+					for (auto& pipeSetIt : pipeSets)
+					{
+						Pipe::Movement(pipeSetIt, deltaTime);
+					}
+
+					Player::Movement(player, deltaTime);
+					Player::AddPoint(player.pos.x, player.points, pipeSets);
+					Player::DidPlayerDied(player, pipeSets);
+					Pipe::Destructor(pipeSets);
+				}
 			}
 
-			Player::Movement(player, deltaTime);
-			Player::AddPoint(player.pos.x, player.points, pipeSets);
-			Player::DidPlayerDied(player, pipeSets);
-			Pipe::Destructor(pipeSets);
+			break;
+
+		default:
+			break;
 		}
 
 		BeginDrawing();
@@ -69,7 +112,32 @@ int main()
 
 		case Menus::Playing:
 
-			Scene::DrawGamePlay(player, pipeSets);
+			if (player.collide)
+			{
+				Scene::DrawGameOver(gameState, GetFontDefault());
+
+				GameManager::ShouldResetGame(gameState, player, pipeSets, spawmTimer, pause);
+			}
+			else
+			{
+				if (pause)
+				{
+					Color semiTransparentBlack = { 0, 0, 0, 150 };
+					DrawRectangle(0, 0, static_cast<int>(screenWidth), static_cast<int>(screenHeight), semiTransparentBlack);
+				}
+
+				Scene::DrawGamePlay(player, pipeSets, pause);
+
+				if (pause)
+				{
+					Scene::DrawPauseMenu(gameState, GetFontDefault(), pause);
+
+					if (gameState == Menus::MainMenu)
+						GameManager::ResetGame(player, pipeSets, spawmTimer, pause);
+				}
+
+			}
+
 			break;
 
 		case Menus::Rules:

@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8B33C5F0-2716-430D-A6E9-83ADE9A5EDA7}|FlappyBird.vcxproj|C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\Scenes\\scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8B33C5F0-2716-430D-A6E9-83ADE9A5EDA7}|FlappyBird.vcxproj|solutionrelative:src\\Scenes\\scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B33C5F0-2716-430D-A6E9-83ADE9A5EDA7}|FlappyBird.vcxproj|C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8B33C5F0-2716-430D-A6E9-83ADE9A5EDA7}|FlappyBird.vcxproj|solutionrelative:src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B33C5F0-2716-430D-A6E9-83ADE9A5EDA7}|FlappyBird.vcxproj|C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\Scenes\\scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8B33C5F0-2716-430D-A6E9-83ADE9A5EDA7}|FlappyBird.vcxproj|solutionrelative:src\\Scenes\\scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B33C5F0-2716-430D-A6E9-83ADE9A5EDA7}|FlappyBird.vcxproj|C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\GamePlay\\Manager\\gameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8B33C5F0-2716-430D-A6E9-83ADE9A5EDA7}|FlappyBird.vcxproj|solutionrelative:src\\GamePlay\\Manager\\gameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B33C5F0-2716-430D-A6E9-83ADE9A5EDA7}|FlappyBird.vcxproj|C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\GamePlay\\Manager\\gameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8B33C5F0-2716-430D-A6E9-83ADE9A5EDA7}|FlappyBird.vcxproj|solutionrelative:src\\GamePlay\\Manager\\gameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "scene.h",
+              "DocumentMoniker": "C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\Scenes\\scene.h",
+              "RelativeDocumentMoniker": "src\\Scenes\\scene.h",
+              "ToolTip": "C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\Scenes\\scene.h",
+              "RelativeToolTip": "src\\Scenes\\scene.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-01T00:58:25.196Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "scene.cpp",
+              "DocumentMoniker": "C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\Scenes\\scene.cpp",
+              "RelativeDocumentMoniker": "src\\Scenes\\scene.cpp",
+              "ToolTip": "C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\Scenes\\scene.cpp",
+              "RelativeToolTip": "src\\Scenes\\scene.cpp",
+              "ViewState": "AgIAAD4BAAAAAAAAAAArwEEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-01T00:56:32.249Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "gameManager.h",
+              "DocumentMoniker": "C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\GamePlay\\Manager\\gameManager.h",
+              "RelativeDocumentMoniker": "src\\GamePlay\\Manager\\gameManager.h",
+              "ToolTip": "C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\GamePlay\\Manager\\gameManager.h",
+              "RelativeToolTip": "src\\GamePlay\\Manager\\gameManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-01T00:38:25.029Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "gameManager.cpp",
+              "DocumentMoniker": "C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\GamePlay\\Manager\\gameManager.cpp",
+              "RelativeDocumentMoniker": "src\\GamePlay\\Manager\\gameManager.cpp",
+              "ToolTip": "C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\GamePlay\\Manager\\gameManager.cpp",
+              "RelativeToolTip": "src\\GamePlay\\Manager\\gameManager.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-01T00:38:21.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\main.cpp",
+              "RelativeDocumentMoniker": "src\\main.cpp",
+              "ToolTip": "C:\\Users\\Kapnack\\Desktop\\FlappyBird\\Flappy Bird\\src\\main.cpp",
+              "RelativeToolTip": "src\\main.cpp",
+              "ViewState": "AgIAACwAAAAAAAAAAAArwEcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-01T00:33:08.179Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -9,7 +9,7 @@
 #include "GamePlay/Entities/player.h"
 #include "GamePlay/Entities/pipe.h"
 
-void Scene::DrawGamePlay(Player::Player player, std::list<Pipe::PipeSet>& pipeSets)
+void Scene::DrawGamePlay(Player::Player player, std::list<Pipe::PipeSet>& pipeSets, bool pause)
 {
 	DrawCircle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), player.radius, PURPLE);
 
@@ -19,13 +19,16 @@ void Scene::DrawGamePlay(Player::Player player, std::list<Pipe::PipeSet>& pipeSe
 		DrawRectangleRec(pipeSetIt.bottom.rect, RED);
 	}
 
-	std::string text = "Points: " + std::to_string(player.points);
+	if (!pause)
+	{
+		std::string text = "Points: " + std::to_string(player.points);
 
-	DrawText(text.c_str(), 0, 0, 20, RAYWHITE);
+		DrawText(text.c_str(), 0, 0, 20, RAYWHITE);
 
-	text = "PipeSet Count: " + std::to_string(pipeSets.size());
+		text = "PipeSet Count: " + std::to_string(pipeSets.size());
 
-	DrawText(text.c_str(), static_cast<int>(screenWidth) - MeasureText(text.c_str(), 20), 0, 20, RAYWHITE);
+		DrawText(text.c_str(), static_cast<int>(screenWidth) - MeasureText(text.c_str(), 20), 0, 20, RAYWHITE);
+	}
 }
 
 void Scene::DrawMainMenu(Menus& gameState, Font font, Texture2D gamesTitle)
@@ -316,14 +319,12 @@ void Scene::DrawPauseMenu(Menus& gameState, Font font, bool& pause)
 			if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 			{
 				gameState = buttons[i].option;
-				pause = false;
+
+				if (buttons[i].option != Menus::WantToExit)
+					pause = false;
 			}
 		}
 	}
-
-
-	Color semiTransparentBlack = { 0, 0, 0, 150 };
-	DrawRectangle(0, 0, static_cast<int>(screenWidth), static_cast<int>(screenHeight), semiTransparentBlack);
 
 	Vector2 titlePos =
 	{
