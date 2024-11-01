@@ -13,7 +13,6 @@ void Player::Movement(Player& player, float deltaTime)
 	player.velocityY += gravity * deltaTime;
 	player.pos.y += player.velocityY * deltaTime;
 
-	// Limitar el movimiento del pájaro
 	if (player.pos.y > screenHeight - player.radius)
 	{
 		player.pos.y = screenHeight - player.radius;

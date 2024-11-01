@@ -36,7 +36,9 @@ int main()
 
 	InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), "Flappy Bird");
 
-	Sprites::initSprites(sprites);
+	Sprites::initSprites(sprites, player.texture);
+
+	player.frameRec = { 0.0f, 0.0f, (float)player.texture.width / 3, (float)player.texture.height };
 
 	SetExitKey(0);
 
@@ -92,6 +94,19 @@ int main()
 					Player::AddPoint(player.pos.x, player.points, pipeSets);
 					Player::DidPlayerDied(player, pipeSets);
 					Pipe::Destructor(pipeSets);
+
+					player.framesCounter++;
+
+					if (player.framesCounter >= (60 / player.framesSpeed))
+					{
+						player.framesCounter = 0;
+						player.currentFrame++;
+
+						if (player.currentFrame > 2) 
+							player.currentFrame = 0;
+
+						player.frameRec.x = (float)player.currentFrame * (float)player.texture.width / 3;
+					}
 				}
 			}
 
@@ -165,7 +180,7 @@ int main()
 
 	}
 
-	Sprites::unloadSprites(sprites);
+	Sprites::unloadSprites(sprites, player.texture);
 
 	CloseWindow();
 

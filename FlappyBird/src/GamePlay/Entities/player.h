@@ -11,11 +11,17 @@ namespace Player
 	{
 		Vector2 pos = { screenWidth / 5, screenHeight / 2 };
 
+		Texture2D texture = {};
+
+		Rectangle frameRec = {};
+
 		float velocityY = 0;
 
 		int points = 0;
 
-		Texture2D texture = {};
+		int currentFrame = 0;
+		int framesCounter = 0;
+		int framesSpeed = 8;
 
 		float size = 64;
 		float radius = size / 2;
