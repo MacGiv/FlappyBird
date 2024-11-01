@@ -2,6 +2,8 @@
 
 #include <cstdlib>
 
+#include "raymath.h"
+
 #include "Engine/engine.h"
 
 float Pipe::actualSpacing = maxSpacing;
@@ -20,6 +22,8 @@ Pipe::PipeSet Pipe::Creator()
 	const float pipeHeight = screenHeight;
 
 	newPipeSet.top.rect.x = screenWidth + newPipeSet.top.rect.width;
+
+	newPipeSet.top.angle = 180 * (PI / 180.0f);
 
 #pragma warning(disable:4244)
 	newPipeSet.top.rect.y = rand() % (static_cast<int>(screenHeight - actualSpacing)) - pipeHeight;

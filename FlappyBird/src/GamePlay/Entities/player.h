@@ -15,6 +15,8 @@ namespace Player
 
 		int points = 0;
 
+		Texture2D texture = {};
+
 		float size = 64;
 		float radius = size / 2;
 		bool collide = false;

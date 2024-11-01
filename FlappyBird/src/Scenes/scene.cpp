@@ -8,15 +8,38 @@
 #include "Engine/engine.h"
 #include "GamePlay/Entities/player.h"
 #include "GamePlay/Entities/pipe.h"
+#include <iostream>
 
-void Scene::DrawGamePlay(Player::Player player, std::list<Pipe::PipeSet>& pipeSets, bool pause)
+void Scene::DrawGamePlay(Player::Player player, std::list<Pipe::PipeSet>& pipeSets, Sprites::Sprites& sprites, bool pause)
 {
 	DrawCircle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), player.radius, PURPLE);
 
-	for (auto& pipeSetIt : pipeSets)
+	for (auto pipeSetIt : pipeSets)
 	{
 		DrawRectangleRec(pipeSetIt.top.rect, GREEN);
 		DrawRectangleRec(pipeSetIt.bottom.rect, RED);
+
+		pipeSetIt.top.rect.x += pipeSetIt.top.rect.width / 2;
+		pipeSetIt.top.rect.y += pipeSetIt.top.rect.height / 2;
+
+		float pipeSpriteWidth = static_cast<float>(sprites.pipeImage.width);
+		float pipeSpriteHeight = static_cast<float>(sprites.pipeImage.height);
+
+		DrawTexturePro(
+			sprites.pipeImage,
+			Rectangle{ 0,0, pipeSpriteWidth, pipeSpriteHeight },
+			pipeSetIt.top.rect,
+			Vector2{ pipeSetIt.top.rect.width / 2, pipeSetIt.top.rect.height / 2 },
+			180.0f,
+			WHITE);
+
+		DrawTexturePro(
+			sprites.pipeImage,
+			Rectangle{ 0,0,pipeSpriteWidth, pipeSpriteHeight },
+			pipeSetIt.bottom.rect,
+			Vector2{ 0,0 },
+			pipeSetIt.bottom.angle,
+			WHITE);
 	}
 
 	if (!pause)

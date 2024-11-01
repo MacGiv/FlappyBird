@@ -5,6 +5,7 @@
 #include "raylib.h"
 
 #include "Engine/engine.h"
+#include "Engine/Sprites/sprites.h"
 #include "Scenes/menus.h"
 #include "Scenes/scene.h"
 #include "GamePlay/Manager/gameManager.h"
@@ -27,11 +28,15 @@ int main()
 
 	Texture2D texture = {};
 
+	Sprites::Sprites sprites = {};
+
 #pragma warning(disable:4244)
 	srand(time(NULL));
 #pragma warning(default:4244)
 
 	InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), "Flappy Bird");
+
+	Sprites::initSprites(sprites);
 
 	SetExitKey(0);
 
@@ -65,9 +70,6 @@ int main()
 
 			if (!player.collide && gameState == Menus::Playing)
 			{
-
-				std::cout << pause << "\n";
-
 				if (IsKeyPressed(KEY_ESCAPE))
 					pause = !pause;
 
@@ -126,7 +128,7 @@ int main()
 					DrawRectangle(0, 0, static_cast<int>(screenWidth), static_cast<int>(screenHeight), semiTransparentBlack);
 				}
 
-				Scene::DrawGamePlay(player, pipeSets, pause);
+				Scene::DrawGamePlay(player, pipeSets, sprites, pause);
 
 				if (pause)
 				{
@@ -162,6 +164,8 @@ int main()
 		EndDrawing();
 
 	}
+
+	Sprites::unloadSprites(sprites);
 
 	CloseWindow();
 

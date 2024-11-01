@@ -57,6 +57,9 @@
     <ClCompile Include="src\GamePlay\Entities\pipe.cpp">
       <Filter>Cpp Files\GamePlay</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Sprites\sprites.cpp">
+      <Filter>Cpp Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GamePlay\Entities\pipe.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\utilities.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Sprites\sprites.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

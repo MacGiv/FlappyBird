@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\engine.cpp" />
+    <ClCompile Include="src\Engine\Sprites\sprites.cpp" />
     <ClCompile Include="src\Engine\utilities.cpp" />
     <ClCompile Include="src\GamePlay\Entities\pipe.cpp" />
     <ClCompile Include="src\GamePlay\Entities\player.cpp" />
@@ -31,6 +32,7 @@
   <ItemGroup>
     <ClInclude Include="src\Engine\button.h" />
     <ClInclude Include="src\Engine\engine.h" />
+    <ClInclude Include="src\Engine\Sprites\sprites.h" />
     <ClInclude Include="src\Engine\utilities.h" />
     <ClInclude Include="src\GamePlay\Entities\pipe.h" />
     <ClInclude Include="src\GamePlay\Entities\player.h" />
