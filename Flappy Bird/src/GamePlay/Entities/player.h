@@ -3,7 +3,7 @@
 #include <list>
 
 #include "pipe.h"
-#include "engine.h"
+#include "Engine/engine.h"
 
 namespace Player
 {
@@ -13,11 +13,14 @@ namespace Player
 
 		float velocityY = 0;
 
+		int points = 0;
+
 		float size = 64;
 		float radius = size / 2;
 		bool collide = false;
 	};
 
 	void Movement(Player& player, float deltaTime);
+	void AddPoint(float posX, int& points, std::list<Pipe::PipeSet>& pipes);
 	void DidPlayerDied(Player& player, std::list<Pipe::PipeSet>& pipes);
 }

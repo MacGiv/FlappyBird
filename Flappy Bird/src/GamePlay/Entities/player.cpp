@@ -5,7 +5,7 @@ void Player::Movement(Player& player, float deltaTime)
 	const float jumpForce = -300.0f;
 	const float gravity = 500.0f;
 
-	if (IsKeyPressed(KEY_SPACE)) 
+	if (IsKeyPressed(KEY_SPACE))
 	{
 		player.velocityY = jumpForce;
 	}
@@ -14,16 +14,29 @@ void Player::Movement(Player& player, float deltaTime)
 	player.pos.y += player.velocityY * deltaTime;
 
 	// Limitar el movimiento del pájaro
-	if (player.pos.y > screenHeight - player.radius) 
+	if (player.pos.y > screenHeight - player.radius)
 	{
 		player.pos.y = screenHeight - player.radius;
 		player.velocityY = 0;
 	}
 
-	if (player.pos.y < player.radius) 
+	if (player.pos.y < player.radius)
 	{
 		player.pos.y = player.radius;
 		player.velocityY = 0;
+	}
+}
+
+void Player::AddPoint(float posX, int& points, std::list<Pipe::PipeSet>& pipes)
+{
+	for (auto& pipe : pipes)
+	{
+		if (!pipe.counted && posX >= pipe.top.rect.x)
+		{
+			points++;
+			pipe.counted = true;
+			break;
+		}
 	}
 }
 
@@ -31,7 +44,7 @@ void Player::DidPlayerDied(Player& player, std::list<Pipe::PipeSet>& pipes)
 {
 	//Rect Circle Collition
 
-	for (auto& pipe : pipes)
+	for (const auto& pipe : pipes)
 	{
 		float closestX = std::max(pipe.top.rect.x, std::min(player.pos.x, pipe.top.rect.x + pipe.top.rect.width));
 		float closestY = std::max(pipe.top.rect.y, std::min(player.pos.y, pipe.top.rect.y + pipe.top.rect.height));

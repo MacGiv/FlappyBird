@@ -1,5 +1,7 @@
 #pragma once
 
+#include <list>
+
 #include "raylib.h"
 
 namespace Pipe
@@ -12,16 +14,19 @@ namespace Pipe
 
 	struct PipeSet
 	{
+		bool counted = false;
+
 		Pipe top = {};
 		Pipe bottom = {};
 	};
 
-	const float speed = 64;
+	const float speed = 150;
 
 	const float maxSpacing = 384;
 	extern float actualSpacing;
 	const float minSpacing = 70;
 
-	void Movement(PipeSet& pipe, float deltaTime);
+	void Movement(PipeSet& pipeSets, float deltaTime);
+	void Destructor(std::list<PipeSet>& pipeSets);
 	PipeSet Creator();
 }

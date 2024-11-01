@@ -19,15 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="engine.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="pipe.cpp" />
-    <ClCompile Include="player.cpp" />
+    <ClCompile Include="src\Engine\engine.cpp" />
+    <ClCompile Include="src\Engine\utilities.cpp" />
+    <ClCompile Include="src\GamePlay\Entities\pipe.cpp" />
+    <ClCompile Include="src\GamePlay\Entities\player.cpp" />
+    <ClCompile Include="src\GamePlay\Manager\gameManager.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Scenes\menus.cpp" />
+    <ClCompile Include="src\Scenes\scene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine.h" />
-    <ClInclude Include="pipe.h" />
-    <ClInclude Include="player.h" />
+    <ClInclude Include="src\Engine\button.h" />
+    <ClInclude Include="src\Engine\engine.h" />
+    <ClInclude Include="src\Engine\utilities.h" />
+    <ClInclude Include="src\GamePlay\Entities\pipe.h" />
+    <ClInclude Include="src\GamePlay\Entities\player.h" />
+    <ClInclude Include="src\GamePlay\Manager\gameManager.h" />
+    <ClInclude Include="src\Scenes\menus.h" />
+    <ClInclude Include="src\Scenes\scene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -89,8 +98,8 @@
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IntDir>$(SolutionDir)\obj\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\obj\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\..\bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -118,7 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\lib\raylib\include;$(SolutionDir)\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\raylib\include;$(SolutionDir)\src</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -128,7 +137,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\lib\raylib\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\raylib\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

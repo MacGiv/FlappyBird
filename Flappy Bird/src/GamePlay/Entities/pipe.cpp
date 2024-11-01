@@ -2,14 +2,14 @@
 
 #include <cstdlib>
 
-#include "engine.h"
+#include "Engine/engine.h"
 
 float Pipe::actualSpacing = maxSpacing;
 
 void Pipe::Movement(PipeSet& pipeSet, float deltaTime)
 {
 	pipeSet.top.rect.x -= speed * deltaTime;
-	pipeSet.bottom.rect.x -= speed * deltaTime;
+	pipeSet.bottom.rect.x = pipeSet.top.rect.x;
 }
 
 Pipe::PipeSet Pipe::Creator()
@@ -36,4 +36,19 @@ Pipe::PipeSet Pipe::Creator()
 	newPipeSet.bottom.rect.height = pipeHeight;
 
 	return newPipeSet;
+}
+
+void Pipe::Destructor(std::list<PipeSet>& pipeSets)
+{
+	if (!pipeSets.empty())
+	{
+		for (auto pipeSetIt = pipeSets.begin(); pipeSetIt != pipeSets.end(); pipeSetIt++)
+		{
+			if (pipeSetIt->top.rect.x + pipeSetIt->top.rect.width <= 0.0f)
+			{
+				pipeSets.erase(pipeSetIt);
+				break;
+			}
+		}
+	}
 }
