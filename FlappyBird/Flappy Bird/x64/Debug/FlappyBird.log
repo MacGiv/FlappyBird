@@ -1,0 +1,28 @@
+﻿  engine.cpp
+  utilities.cpp
+  pipe.cpp
+C:\Users\Kapnack\Desktop\FlappyBird\Flappy Bird\src\Engine\utilities.h(5,10): error C1083: Cannot open include file: 'raylib.h': No such file or directory
+  (compiling source file 'src/Engine/utilities.cpp')
+  
+C:\Users\Kapnack\Desktop\FlappyBird\Flappy Bird\src\GamePlay\Entities\pipe.h(5,10): error C1083: Cannot open include file: 'raylib.h': No such file or directory
+  (compiling source file 'src/GamePlay/Entities/pipe.cpp')
+  
+  player.cpp
+C:\Users\Kapnack\Desktop\FlappyBird\Flappy Bird\src\GamePlay\Entities\pipe.h(5,10): error C1083: Cannot open include file: 'raylib.h': No such file or directory
+  (compiling source file 'src/GamePlay/Entities/player.cpp')
+  
+  gameManager.cpp
+C:\Users\Kapnack\Desktop\FlappyBird\Flappy Bird\src\GamePlay\Manager\gameManager.h(5,10): error C1083: Cannot open include file: 'Scenes/menus.h': No such file or directory
+  (compiling source file 'src/GamePlay/Manager/gameManager.cpp')
+  
+  main.cpp
+C:\Users\Kapnack\Desktop\FlappyBird\Flappy Bird\src\main.cpp(5,10): error C1083: Cannot open include file: 'raylib.h': No such file or directory
+  menus.cpp
+C:\Users\Kapnack\Desktop\FlappyBird\Flappy Bird\src\Scenes\menus.h(3,10): error C1083: Cannot open include file: 'raylib.h': No such file or directory
+  (compiling source file 'src/Scenes/menus.cpp')
+  
+  scene.cpp
+C:\Users\Kapnack\Desktop\FlappyBird\Flappy Bird\src\Scenes\scene.h(5,10): error C1083: Cannot open include file: 'raylib.h': No such file or directory
+  (compiling source file 'src/Scenes/scene.cpp')
+  
+  Generating Code...
