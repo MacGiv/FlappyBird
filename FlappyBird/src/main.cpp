@@ -36,9 +36,11 @@ int main()
 
 	InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), "Flappy Bird");
 
-	Sprites::initSprites(sprites, player.texture);
+	Sprites::initSprites(sprites);
 
-	player.frameRec = { 0.0f, 0.0f, (float)player.texture.width / 3, (float)player.texture.height };
+	player.frameRec = { 0.0f, 0.0f, (float)sprites.playerSheet.width / 3, (float)sprites.playerSheet.height };
+
+	//SetTargetFPS(60);
 
 	SetExitKey(0);
 
@@ -90,23 +92,11 @@ int main()
 						Pipe::Movement(pipeSetIt, deltaTime);
 					}
 
-					Player::Movement(player, deltaTime);
+					Player::Movement(player, sprites.playerSheet, deltaTime);
 					Player::AddPoint(player.pos.x, player.points, pipeSets);
 					Player::DidPlayerDied(player, pipeSets);
 					Pipe::Destructor(pipeSets);
 
-					player.framesCounter++;
-
-					if (player.framesCounter >= (60 / player.framesSpeed))
-					{
-						player.framesCounter = 0;
-						player.currentFrame++;
-
-						if (player.currentFrame > 2) 
-							player.currentFrame = 0;
-
-						player.frameRec.x = (float)player.currentFrame * (float)player.texture.width / 3;
-					}
 				}
 			}
 
@@ -133,7 +123,7 @@ int main()
 			{
 				Scene::DrawGameOver(gameState, GetFontDefault());
 
-				GameManager::ShouldResetGame(gameState, player, pipeSets, spawmTimer, pause);
+				GameManager::ShouldResetGame(gameState, player, sprites.playerSheet, pipeSets, spawmTimer, pause);
 			}
 			else
 			{
@@ -150,7 +140,7 @@ int main()
 					Scene::DrawPauseMenu(gameState, GetFontDefault(), pause);
 
 					if (gameState == Menus::MainMenu)
-						GameManager::ResetGame(player, pipeSets, spawmTimer, pause);
+						GameManager::ResetGame(player, sprites.playerSheet, pipeSets, spawmTimer, pause);
 				}
 
 			}
@@ -180,7 +170,7 @@ int main()
 
 	}
 
-	Sprites::unloadSprites(sprites, player.texture);
+	Sprites::unloadSprites(sprites);
 
 	CloseWindow();
 

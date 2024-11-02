@@ -8,6 +8,6 @@
 
 namespace GameManager
 {
-	void ResetGame(Player::Player& player, std::list<Pipe::PipeSet>& pipeSets, float& spawnTimer, bool& pause);
-	void ShouldResetGame(Menus& gameState, Player::Player& player, std::list<Pipe::PipeSet>& pipeSets, float& spawnTimer, bool& pause);
+	void ResetGame(Player::Player& player, Texture2D& playerSheet, std::list<Pipe::PipeSet>& pipeSets, float& spawnTimer, bool& pause);
+	void ShouldResetGame(Menus& gameState, Player::Player& player, Texture2D& playerSheet,std::list<Pipe::PipeSet>& pipeSets, float& spawnTimer, bool& pause);
 }

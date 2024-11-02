@@ -14,14 +14,14 @@ void Scene::DrawGamePlay(Player::Player player, std::list<Pipe::PipeSet>& pipeSe
 {
 	DrawCircle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), player.radius, PURPLE);
 
-	player.pos.x += player.texture.width / 2;
-	player.pos.y += player.texture.height / 2;
+	player.pos.x += sprites.playerSheet.width / 2;
+	player.pos.y += sprites.playerSheet.height / 2;
 
 	DrawTexturePro(
-		player.texture,
+		sprites.playerSheet,
 		player.frameRec,
 		Rectangle{ player.pos.x - player.size / 2, player.pos.y - player.size / 2, player.size, player.size },
-		Vector2{ static_cast<float>(player.texture.width) / 2, static_cast<float>(player.texture.height) / 2 },
+		Vector2{ static_cast<float>(sprites.playerSheet.width) / 2, static_cast<float>(sprites.playerSheet.height) / 2 },
 		0,
 		WHITE);
 

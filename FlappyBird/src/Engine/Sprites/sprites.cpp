@@ -1,13 +1,13 @@
 #include "sprites.h"
 
-void Sprites::initSprites(Sprites& sprites, Texture2D& playerSprite)
+void Sprites::initSprites(Sprites& sprites)
 {
-	playerSprite = LoadTexture("res/birdSpriteSheet.png");
+	sprites.playerSheet = LoadTexture("res/birdSpriteSheet.png");
 	sprites.pipeImage = LoadTexture("res/pipe.png");
 }
 
-void Sprites::unloadSprites(Sprites& sprites, Texture2D& playerSprite)
+void Sprites::unloadSprites(Sprites& sprites)
 {
-	UnloadTexture(playerSprite);
+	UnloadTexture(sprites.playerSheet);
 	UnloadTexture(sprites.pipeImage);
 }

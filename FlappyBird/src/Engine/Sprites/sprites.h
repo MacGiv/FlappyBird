@@ -10,6 +10,6 @@ namespace Sprites
 		Texture2D pipeImage;
 	};
 
-	void initSprites(Sprites& sprites, Texture2D& playerSprite);
-	void unloadSprites(Sprites& sprites, Texture2D& playerSprite);
+	void initSprites(Sprites& sprites);
+	void unloadSprites(Sprites& sprites);
 }

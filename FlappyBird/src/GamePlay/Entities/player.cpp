@@ -1,6 +1,6 @@
 #include "player.h"
 
-void Player::Movement(Player& player, float deltaTime)
+void Player::Movement(Player& player, Texture2D& playerSheet, float deltaTime)
 {
 	const float jumpForce = -300.0f;
 	const float gravity = 500.0f;
@@ -8,7 +8,10 @@ void Player::Movement(Player& player, float deltaTime)
 	if (IsKeyPressed(KEY_SPACE))
 	{
 		player.velocityY = jumpForce;
+		player.animate = true;
 	}
+
+	Anitmation(player, playerSheet, deltaTime);
 
 	player.velocityY += gravity * deltaTime;
 	player.pos.y += player.velocityY * deltaTime;
@@ -23,6 +26,31 @@ void Player::Movement(Player& player, float deltaTime)
 	{
 		player.pos.y = player.radius;
 		player.velocityY = 0;
+	}
+}
+
+void Player::Anitmation(Player& player, Texture2D& playerSheet, float deltaTime)
+{
+	if (player.animate)
+	{
+		player.framesCounter += deltaTime;
+
+		const float frameDuration = 0.12f;
+
+		if (player.framesCounter >= frameDuration)
+		{
+			player.framesCounter -= frameDuration;
+			player.currentFrame++;
+
+			if (player.currentFrame > 2)
+			{
+				player.currentFrame = 0;
+				player.animate = false;
+			}
+
+			// Calcula el rectángulo para el cuadro actual
+			player.frameRec.x = static_cast<float>(player.currentFrame) * (playerSheet.width / 3.0f);
+		}
 	}
 }
 
