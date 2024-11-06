@@ -12,17 +12,10 @@ bool Tools::CheckCollisionCircles(Vector2 center1, float radius1, Vector2 center
 
 bool Tools::CheckMouseButtonCollition(Vector2 mouse, Rectangle button)
 {
-	// is the point inside the rectangle's bounds?
-	if (mouse.x >= button.x &&        // right of the left edge AND
-		mouse.x <= button.x + button.width &&   // left of the right edge AND
-		mouse.y >= button.y &&        // below the top AND
-		mouse.y <= button.y + button.height)
-	{   // above the bottom
-
-		return true;
-	}
-
-	return false;
+	return (mouse.x >= button.x &&
+		mouse.x <= button.x + button.width &&
+		mouse.y >= button.y &&
+		mouse.y <= button.y + button.height);
 }
 
 bool Tools::CheckIfOutOfBounds(Vector2 position, float radius)
