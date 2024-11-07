@@ -25,7 +25,7 @@ void Scene::DrawGamePlay(Player::Player player, std::list<Pipe::PipeSet>& pipeSe
 		0,
 		WHITE);
 
-	for (auto pipeSetIt : pipeSets)
+	for (Pipe::PipeSet pipeSetIt : pipeSets)
 	{
 		DrawRectangleRec(pipeSetIt.top.rect, GREEN);
 		DrawRectangleRec(pipeSetIt.bottom.rect, RED);
@@ -76,7 +76,7 @@ void Scene::DrawMainMenu(Menus& gameState, Font font, Texture2D gamesTitle)
 
 	for (int i = 0; i < maxButtons; i++)
 	{
-		button[i].rec = { startX, startY + i * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight };
+		button[i].rect = { startX, startY + i * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight };
 	}
 
 	button[0].option = Menus::Playing;
@@ -89,7 +89,7 @@ void Scene::DrawMainMenu(Menus& gameState, Font font, Texture2D gamesTitle)
 
 	for (int i = 0; i < maxButtons; i++)
 	{
-		if (Tools::CheckMouseButtonCollition(mouse, button[i].rec))
+		if (Tools::CheckMouseButtonCollition(mouse, button[i].rect))
 		{
 			button[i].color = WHITE;
 
@@ -102,6 +102,8 @@ void Scene::DrawMainMenu(Menus& gameState, Font font, Texture2D gamesTitle)
 				gameState = button[i].option;
 		}
 	}
+
+	DrawText("v0.2", 0, 0, 20, WHITE);
 
 	DrawTexturePro(
 		gamesTitle,
@@ -120,16 +122,16 @@ void Scene::DrawMainMenu(Menus& gameState, Font font, Texture2D gamesTitle)
 		switch (button[i].option)
 		{
 		case Menus::Playing:
-			Tools::DrawButton(button[i].rec, "Play", button[i].color, outline, font);
+			Tools::DrawButton(button[i].rect, "Play", button[i].color, outline, font);
 			break;
 		case Menus::Rules:
-			Tools::DrawButton(button[i].rec, "Rules", button[i].color, outline, font);
+			Tools::DrawButton(button[i].rect, "Rules", button[i].color, outline, font);
 			break;
 		case Menus::Credits:
-			Tools::DrawButton(button[i].rec, "Credits", button[i].color, outline, font);
+			Tools::DrawButton(button[i].rect, "Credits", button[i].color, outline, font);
 			break;
 		case Menus::WantToExit:
-			Tools::DrawButton(button[i].rec, "Exit", button[i].color, outline, font);
+			Tools::DrawButton(button[i].rect, "Exit", button[i].color, outline, font);
 			break;
 		default:
 			break;
@@ -158,12 +160,12 @@ void Scene::DrawCredits(Menus& gameState, Font font)
 	Vector2 chipTonePos = { static_cast<float>(screenWidth) / 2 - MeasureTextEx(font, "ChipTone", newSmallFontSize, 2).x / 2, soundEffectsPos.y + 30 };
 	Vector2 menuPos = { static_cast<float>(screenWidth) / 2 - MeasureTextEx(font, "Press ESC to go back to the Menu.", newSmallFontSize, 2).x / 2, static_cast<float>(screenHeight) - 40 };
 
-	button.rec.width = buttonWidth;
-	button.rec.height = buttonHeight;
+	button.rect.width = buttonWidth;
+	button.rect.height = buttonHeight;
 	button.option = Menus::MainMenu;
-	button.rec.x = static_cast<float>(screenWidth) / 2 - (button.rec.width / 2);
+	button.rect.x = static_cast<float>(screenWidth) / 2 - (button.rect.width / 2);
 
-	button.rec.y = (chipTonePos.y + menuPos.y) / 2 - (button.rec.height / 2);
+	button.rect.y = (chipTonePos.y + menuPos.y) / 2 - (button.rect.height / 2);
 
 	DrawTextEx(font, "Credits", titlePos, newTitleFontSize, 2, BLACK);
 	DrawTextEx(font, "Developer: Lucio Stefano Piccioni.", developerPos, newTextFontSize, 2, BLACK);
@@ -178,7 +180,7 @@ void Scene::DrawCredits(Menus& gameState, Font font)
 
 	Color outline = BLACK;
 
-	if (Tools::CheckMouseButtonCollition(mouse, button.rec))
+	if (Tools::CheckMouseButtonCollition(mouse, button.rect))
 	{
 		button.color = WHITE;
 
@@ -192,7 +194,7 @@ void Scene::DrawCredits(Menus& gameState, Font font)
 	}
 
 	std::string text = "Menu";
-	Tools::DrawButton(button.rec, text, button.color, outline, font);
+	Tools::DrawButton(button.rect, text, button.color, outline, font);
 }
 
 void Scene::DrawGameRules(Menus& gameState, Font font)
@@ -273,11 +275,11 @@ void Scene::DrawGameRules(Menus& gameState, Font font)
 		static_cast<float>(screenHeight) - 60
 	};
 
-	button.rec.width = buttonWidth;
-	button.rec.height = buttonHeight;
+	button.rect.width = buttonWidth;
+	button.rect.height = buttonHeight;
 	button.option = Menus::MainMenu;
-	button.rec.x = static_cast<float>(screenWidth) / 2 - (button.rec.width / 2);
-	button.rec.y = (backToMenuPos.y + powerUpInfoPos.y) / 2 - (button.rec.height / 2);
+	button.rect.x = static_cast<float>(screenWidth) / 2 - (button.rect.width / 2);
+	button.rect.y = (backToMenuPos.y + powerUpInfoPos.y) / 2 - (button.rect.height / 2);
 
 	DrawTextEx(font, "Game Rules", titlePos, titlesFontSize, 2, BLACK);
 	DrawTextEx(font, "Controls:", controlsTitlePos, newTitleFontSize, 2, BLACK);
@@ -296,7 +298,9 @@ void Scene::DrawGameRules(Menus& gameState, Font font)
 
 	Color outline = BLACK;
 
-	if (Tools::CheckMouseButtonCollition(mouse, button.rec))
+	DrawRectangleLinesEx(button.rect, 5, RED);
+
+	if (Tools::CheckMouseButtonCollition(mouse, button.rect))
 	{
 		button.color = WHITE;
 
@@ -310,7 +314,7 @@ void Scene::DrawGameRules(Menus& gameState, Font font)
 	}
 
 	std::string text = "Menu";
-	Tools::DrawButton(button.rec, text, button.color, outline, font);
+	Tools::DrawButton(button.rect, text, button.color, outline, font);
 }
 
 
@@ -332,7 +336,7 @@ void Scene::DrawPauseMenu(Menus& gameState, Font font, bool& pause)
 	// Inicialización de los rectángulos de los botones
 	for (int i = 0; i < buttonCount; i++)
 	{
-		buttons[i].rec = { startX, startY + i * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight };
+		buttons[i].rect = { startX, startY + i * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight };
 	}
 
 	Color outline = BLACK;
@@ -341,7 +345,7 @@ void Scene::DrawPauseMenu(Menus& gameState, Font font, bool& pause)
 	// Dibuja los botones y gestiona la interacción
 	for (int i = 0; i < buttonCount; i++)
 	{
-		if (Tools::CheckMouseButtonCollition(mouse, buttons[i].rec))
+		if (Tools::CheckMouseButtonCollition(mouse, buttons[i].rect))
 		{
 			buttons[i].color = WHITE;
 
@@ -376,13 +380,13 @@ void Scene::DrawPauseMenu(Menus& gameState, Font font, bool& pause)
 		switch (buttons[i].option)
 		{
 		case Menus::Resume:
-			Tools::DrawButton(buttons[i].rec, "Resume", buttons[i].color, outline, font);
+			Tools::DrawButton(buttons[i].rect, "Resume", buttons[i].color, outline, font);
 			break;
 		case Menus::MainMenu:
-			Tools::DrawButton(buttons[i].rec, "Main Menu", buttons[i].color, outline, font);
+			Tools::DrawButton(buttons[i].rect, "Main Menu", buttons[i].color, outline, font);
 			break;
 		case Menus::WantToExit:
-			Tools::DrawButton(buttons[i].rec, "Exit Game", buttons[i].color, outline, font);
+			Tools::DrawButton(buttons[i].rect, "Exit Game", buttons[i].color, outline, font);
 			break;
 		default:
 			break;
@@ -409,7 +413,7 @@ void Scene::DrawGameOver(Menus& gameState, Font font)
 
 	for (int i = 0; i < maxButtons; i++)
 	{
-		button[i].rec = { startX, startY + i * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight };
+		button[i].rect = { startX, startY + i * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight };
 	}
 
 	button[0].option = Menus::Replay;
@@ -418,7 +422,7 @@ void Scene::DrawGameOver(Menus& gameState, Font font)
 
 	for (int i = 0; i < maxButtons; i++)
 	{
-		if (Tools::CheckMouseButtonCollition(mouse, button[i].rec))
+		if (Tools::CheckMouseButtonCollition(mouse, button[i].rect))
 		{
 			button[i].color = IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? YELLOW : WHITE;
 
@@ -437,13 +441,13 @@ void Scene::DrawGameOver(Menus& gameState, Font font)
 		switch (button[i].option)
 		{
 		case Menus::Replay:
-			Tools::DrawButton(button[i].rec, "Replay", button[i].color, outline, font);
+			Tools::DrawButton(button[i].rect, "Replay", button[i].color, outline, font);
 			break;
 		case Menus::MainMenu:
-			Tools::DrawButton(button[i].rec, "Main Menu", button[i].color, outline, font);
+			Tools::DrawButton(button[i].rect, "Main Menu", button[i].color, outline, font);
 			break;
 		case Menus::WantToExit:
-			Tools::DrawButton(button[i].rec, "Exit", button[i].color, outline, font);
+			Tools::DrawButton(button[i].rect, "Exit", button[i].color, outline, font);
 			break;
 		}
 	}
@@ -468,7 +472,7 @@ void Scene::DrawConfirmExit(Menus& gameState, Font font, Menus previusMenu)
 
 	for (int i = 0; i < maxButtons; i++)
 	{
-		button[i].rec = { static_cast<float>(startX), static_cast<float>(startY + i * (buttonHeight + buttonSpacing)), buttonWidth, buttonHeight };
+		button[i].rect = { static_cast<float>(startX), static_cast<float>(startY + i * (buttonHeight + buttonSpacing)), buttonWidth, buttonHeight };
 
 		switch (button[i].option)
 		{
@@ -487,7 +491,7 @@ void Scene::DrawConfirmExit(Menus& gameState, Font font, Menus previusMenu)
 
 	for (int i = 0; i < maxButtons; i++)
 	{
-		if (Tools::CheckMouseButtonCollition(mouse, button[i].rec))
+		if (Tools::CheckMouseButtonCollition(mouse, button[i].rect))
 		{
 			button[i].color = WHITE;
 
@@ -527,11 +531,11 @@ void Scene::DrawConfirmExit(Menus& gameState, Font font, Menus previusMenu)
 		switch (button[i].option)
 		{
 		case Menus::ConfirmExit:
-			Tools::DrawButton(button[i].rec, "Yes", button[i].color, outLine, font);
+			Tools::DrawButton(button[i].rect, "Yes", button[i].color, outLine, font);
 			break;
 
 		case Menus::CancelExit:
-			Tools::DrawButton(button[i].rec, "No", button[i].color, outLine, font);
+			Tools::DrawButton(button[i].rect, "No", button[i].color, outLine, font);
 			break;
 
 		default:
