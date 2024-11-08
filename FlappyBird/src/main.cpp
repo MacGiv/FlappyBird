@@ -1,6 +1,7 @@
 #include <list>
 #include <time.h>
 #include <string>
+#include <iostream>
 
 #include "raylib.h"
 
@@ -11,7 +12,6 @@
 #include "GamePlay/Manager/gameManager.h"
 #include "GamePlay/Entities/player.h"
 #include "GamePlay/Entities/pipe.h"
-#include <iostream>
 
 int main()
 {
@@ -29,6 +29,7 @@ int main()
 	Texture2D texture = {};
 
 	Sprites::Sprites sprites = {};
+	Sprites::SpriteMovement spriteMovement = {};
 
 #pragma warning(disable:4244)
 	srand(time(NULL));
@@ -97,6 +98,23 @@ int main()
 					Player::DidPlayerDied(player, pipeSets);
 					Pipe::Destructor(pipeSets);
 
+					spriteMovement.sky -= 10 * deltaTime;
+					spriteMovement.backBuildings -= 30.0f * deltaTime;
+					spriteMovement.frontBuildings -= 50.0f * deltaTime;
+					spriteMovement.fence -= 100.0f * deltaTime;
+
+					if (spriteMovement.sky <= -screenWidth)
+						spriteMovement.sky = 0;
+
+					if (spriteMovement.backBuildings <= -screenWidth)
+						spriteMovement.backBuildings = 0;
+
+					if (spriteMovement.frontBuildings <= -screenWidth)
+						spriteMovement.frontBuildings = 0;
+
+					if (spriteMovement.fence <= -screenWidth)
+						spriteMovement.fence = 0;
+
 				}
 			}
 
@@ -133,7 +151,7 @@ int main()
 					DrawRectangle(0, 0, static_cast<int>(screenWidth), static_cast<int>(screenHeight), semiTransparentBlack);
 				}
 
-				Scene::DrawGamePlay(player, pipeSets, sprites, pause);
+				Scene::DrawGamePlay(player, pipeSets, sprites, spriteMovement, pause);
 
 				if (pause)
 				{

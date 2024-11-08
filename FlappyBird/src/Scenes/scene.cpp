@@ -10,9 +10,38 @@
 #include "GamePlay/Entities/pipe.h"
 #include <iostream>
 
-void Scene::DrawGamePlay(Player::Player player, std::list<Pipe::PipeSet>& pipeSets, Sprites::Sprites& sprites, bool pause)
+void Scene::DrawGamePlay(Player::Player player, std::list<Pipe::PipeSet>& pipeSets, Sprites::Sprites& sprites, Sprites::SpriteMovement spriteMovement, bool pause)
 {
-	DrawCircle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), player.radius, PURPLE);
+
+	Vector2 origin = { 0.0f, 0.0f };
+
+	// Dibujar el fondo
+	Rectangle sourceRec = { 0.0f, 0.0f, (float)sprites.sky.width, (float)sprites.sky.height };
+
+	Rectangle destRec = { spriteMovement.sky, 0, screenWidth, screenHeight };
+	DrawTexturePro(sprites.sky, sourceRec, destRec, origin, 0.0f, WHITE);
+
+	destRec = { screenWidth + spriteMovement.sky, 0, screenWidth, screenHeight };
+	DrawTexturePro(sprites.sky, sourceRec, destRec, origin, 0.0f, WHITE);
+
+
+
+	sourceRec = { 0.0f, 0.0f, (float)sprites.backBuildings.width, (float)sprites.backBuildings.height };
+
+	destRec = { spriteMovement.backBuildings, 0, screenWidth, screenHeight };
+	DrawTexturePro(sprites.backBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
+
+	destRec = { screenWidth + spriteMovement.backBuildings, 0, screenWidth, screenHeight };
+	DrawTexturePro(sprites.backBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
+
+
+	sourceRec = { 0.0f, 0.0f, (float)sprites.frontBuildings.width, (float)sprites.frontBuildings.height };
+
+	destRec = { spriteMovement.frontBuildings, 0.0f, screenWidth, screenHeight };
+	DrawTexturePro(sprites.frontBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
+
+	destRec = { screenWidth + spriteMovement.frontBuildings, 0.0f, screenWidth, screenHeight };
+	DrawTexturePro(sprites.frontBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
 
 	player.pos.x += sprites.playerSheet.width / 2;
 	player.pos.y += sprites.playerSheet.height / 2;
@@ -52,6 +81,14 @@ void Scene::DrawGamePlay(Player::Player player, std::list<Pipe::PipeSet>& pipeSe
 			pipeSetIt.bottom.angle,
 			WHITE);
 	}
+
+	sourceRec = { 0.0f, 0.0f, (float)sprites.fence.width, (float)sprites.fence.height };
+
+	destRec = { spriteMovement.fence, screenHeight - sprites.fence.height * 2, screenWidth * 2, (float)sprites.fence.height * 2 };
+	DrawTexturePro(sprites.fence, sourceRec, destRec, origin, 0.0f, WHITE);
+
+	destRec = { screenWidth + spriteMovement.fence, screenHeight - sprites.fence.height * 2, screenWidth * 2, (float)sprites.fence.height * 2 };
+	DrawTexturePro(sprites.fence, sourceRec, destRec, origin, 0.0f, WHITE);
 
 	if (!pause)
 	{
