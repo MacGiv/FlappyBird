@@ -140,7 +140,7 @@ void Scene::DrawMainMenu(Menus& gameState, Font font, Texture2D gamesTitle)
 		}
 	}
 
-	DrawText("v0.2", 0, 0, 20, WHITE);
+	DrawText("v0.3", 0, 0, 20, WHITE);
 
 	DrawTexturePro(
 		gamesTitle,
