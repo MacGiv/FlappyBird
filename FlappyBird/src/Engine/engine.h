@@ -1,6 +1,6 @@
 #pragma once
 
-extern const float screenWidth;
-extern const float screenHeight;
+const float screenWidth = 800;
+const float screenHeight = 600;
 
 extern float timmerToCleanBuffer;
