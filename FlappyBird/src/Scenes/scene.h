@@ -4,17 +4,17 @@
 
 #include "raylib.h"
 
-#include "menus.h"
+#include "Scenes/menus.h"
 #include "Engine/Sprites/sprites.h"
 #include "GamePlay/Entities/player.h"
 
-namespace Scene
+namespace Drawers
 {
-	void DrawGamePlay(Player::Player player, std::list<Pipe::PipeSet>& pipeSets, Sprites::Sprites& sprites, Sprites::SpriteMovement spriteMovement, bool pause);
-	void DrawCredits(Menus& gameState, Font font);
-	void DrawMainMenu(Menus& gameState, Font font, Texture2D gamesTitle);
-	void DrawGameRules(Menus& gameState, Font customFont);
-	void DrawGameOver(Menus& gameState, Font font);
-	void DrawPauseMenu(Menus& gameState, Font font, bool& pause);
-	void DrawConfirmExit(Menus& gameState, Font font, Menus previusMenu);
+	void DrawGamePlay(Player::Player player, Player::Player playerTwo, std::list<Pipe::PipeSet>& pipeSets, Sprites::Sprites& sprites, Sprites::SpriteMovement spriteMovement, bool pause);
+	void DrawCredits(Menu::Menus& gameState, Font font);
+	void DrawMainMenu(Menu::Menus& gameState, Font font, Texture2D gamesTitle);
+	void DrawGameRules(Menu::Menus& gameState, Font customFont);
+	void DrawGameOver(Menu::Menus& gameState, Font font);
+	void DrawPauseMenu(Menu::Menus& gameState, Font font, bool& pause);
+	void DrawConfirmExit(Menu::Menus& gameState, Font font, Menu::Menus previusMenu);
 }
