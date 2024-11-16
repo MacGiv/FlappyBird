@@ -22,11 +22,11 @@ namespace Pipe
 
 	const float speed = 150;
 
-	const float maxSpacing = 384;
+	const float maxSpacing = 250;
 	extern float actualSpacing;
 	const float minSpacing = 70;
 
 	void Movement(PipeSet& pipeSets, float deltaTime);
-	void Destructor(std::list<PipeSet>& pipeSets);
+	void HandleOutOfBounds(std::list<PipeSet>& pipeSets);
 	PipeSet Creator();
 }
