@@ -18,7 +18,4 @@ bool Tools::CheckMouseButtonCollision(Vector2 mouse, Rectangle button)
 		mouse.y <= button.y + button.height);
 }
 
-bool Tools::CheckIfOutOfBounds(Vector2 position, float radius)
-{
-	return  (position.x + radius < 0 || position.x - radius > screenWidth || position.y + radius < 0 || position.y - radius > screenHeight);
-}
+//
