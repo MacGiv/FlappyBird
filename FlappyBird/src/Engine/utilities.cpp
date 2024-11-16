@@ -10,7 +10,7 @@ bool Tools::CheckCollisionCircles(Vector2 center1, float radius1, Vector2 center
 	return distance <= (radius1 + radius2);
 }
 
-bool Tools::CheckMouseButtonCollition(Vector2 mouse, Rectangle button)
+bool Tools::CheckMouseButtonCollision(Vector2 mouse, Rectangle button)
 {
 	return (mouse.x >= button.x &&
 		mouse.x <= button.x + button.width &&
@@ -22,26 +22,3 @@ bool Tools::CheckIfOutOfBounds(Vector2 position, float radius)
 {
 	return  (position.x + radius < 0 || position.x - radius > screenWidth || position.y + radius < 0 || position.y - radius > screenHeight);
 }
-
-void Tools::DrawButton(Rectangle rect, const std::string text, Color color, Color outline, Font font)
-{
-	DrawRectangleRec(rect, color);
-	DrawRectangleLinesEx(rect, 2, outline);
-
-	Vector2 textSize = MeasureTextEx(font, text.c_str(), textFontSize, 1);
-
-	Vector2 textPosition = {
-		rect.x + (rect.width - textSize.x) / 2,
-		rect.y + (rect.height - textSize.y) / 2
-	};
-
-	DrawTextPro(font,
-		text.c_str(),
-		textPosition,
-		Vector2{ 0,0 },
-		0,
-		textFontSize,
-		0,
-		BLACK);
-}
-
