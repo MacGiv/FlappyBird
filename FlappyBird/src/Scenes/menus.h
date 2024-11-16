@@ -2,6 +2,10 @@
 
 #include "raylib.h"
 
+namespace Menu 
+{
+
+
 enum class Menus
 {
 	MainMenu,
@@ -21,10 +25,9 @@ enum class Menus
 
 };
 
-extern const float buttonWidth;
-extern const float buttonHeight;
-extern const float buttonSpacing;
 
 extern const float titlesFontSize;
 extern const float textFontSize;
 extern const float scoreFontSize;
+
+} // namespace Menu
