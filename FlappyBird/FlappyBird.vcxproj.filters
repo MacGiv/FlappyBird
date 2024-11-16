@@ -60,6 +60,12 @@
     <ClCompile Include="src\Engine\Sprites\sprites.cpp">
       <Filter>Cpp Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\GamePlay\Manager\gameLoop.cpp">
+      <Filter>Cpp Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\button.cpp">
+      <Filter>Cpp Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GamePlay\Entities\pipe.h">
@@ -88,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Sprites\sprites.h">
       <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GamePlay\Manager\gameLoop.h">
+      <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\button.cpp" />
     <ClCompile Include="src\Engine\engine.cpp" />
     <ClCompile Include="src\Engine\Sprites\sprites.cpp" />
     <ClCompile Include="src\Engine\utilities.cpp" />
     <ClCompile Include="src\GamePlay\Entities\pipe.cpp" />
     <ClCompile Include="src\GamePlay\Entities\player.cpp" />
+    <ClCompile Include="src\GamePlay\Manager\gameLoop.cpp" />
     <ClCompile Include="src\GamePlay\Manager\gameManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Scenes\menus.cpp" />
@@ -36,6 +38,7 @@
     <ClInclude Include="src\Engine\utilities.h" />
     <ClInclude Include="src\GamePlay\Entities\pipe.h" />
     <ClInclude Include="src\GamePlay\Entities\player.h" />
+    <ClInclude Include="src\GamePlay\Manager\gameLoop.h" />
     <ClInclude Include="src\GamePlay\Manager\gameManager.h" />
     <ClInclude Include="src\Scenes\menus.h" />
     <ClInclude Include="src\Scenes\scene.h" />
