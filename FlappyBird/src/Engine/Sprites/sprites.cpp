@@ -2,7 +2,8 @@
 
 void Sprites::initSprites(Sprites& sprites)
 {
-	sprites.playerSheet = LoadTexture("res/birdSpriteSheet.png");
+	sprites.playerOneSheet = LoadTexture("res/birdSpriteSheet.png");
+	sprites.playerTwoSheet = LoadTexture("res/birdSpriteSheet_2.png");
 	sprites.pipeImage = LoadTexture("res/pipe.png");
 
 	sprites.sky = LoadTexture("res/Paralax/night sky.png");
@@ -13,7 +14,7 @@ void Sprites::initSprites(Sprites& sprites)
 
 void Sprites::unloadSprites(Sprites& sprites)
 {
-	UnloadTexture(sprites.playerSheet);
+	UnloadTexture(sprites.playerOneSheet);
 	UnloadTexture(sprites.pipeImage);
 
 	UnloadTexture(sprites.backBuildings);
