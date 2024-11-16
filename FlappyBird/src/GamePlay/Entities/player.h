@@ -25,8 +25,12 @@ namespace Player
 
 		bool animate = false;
 		bool collide = false;
+
+		int id = 0;
 	};
 
+
+	void InitializePlayer(Player& player, int id);
 	void Movement(Player& player, Texture2D& playerSheet, float deltaTime);
 	void Anitmation(Player& player, Texture2D& playerSheet, float deltaTime);
 	void AddPoint(float posX, int& points, std::list<Pipe::PipeSet>& pipes);

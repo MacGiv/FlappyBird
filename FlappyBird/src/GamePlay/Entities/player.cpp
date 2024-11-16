@@ -1,14 +1,49 @@
 #include "player.h"
 
+
+void Player::InitializePlayer(Player& player, int id)
+{
+	player.pos = { screenWidth / 5, screenHeight / 2 };
+
+	player.frameRec = {};
+
+	player.velocityY = 0;
+
+	player.points = 0;
+
+	player.currentFrame = 0;
+	player.framesCounter = 0;
+
+	player.size = 64;
+	player.radius = player.size / 2;
+
+	player.animate = false;
+	player.collide = false;
+
+	player.id = id;
+}
+
 void Player::Movement(Player& player, Texture2D& playerSheet, float deltaTime)
 {
 	const float jumpForce = -300.0f;
 	const float gravity = 500.0f;
 
-	if (IsKeyPressed(KEY_SPACE))
+	if (player.id == 1)
 	{
-		player.velocityY = jumpForce;
-		player.animate = true;
+		if (IsKeyPressed(KEY_SPACE))
+		{
+			player.velocityY = jumpForce;
+			player.animate = true;
+		}
+	}
+	else if (player.id == 2)
+	{
+		if (IsKeyPressed(KEY_UP))
+		{
+			player.velocityY = jumpForce;
+			player.animate = true;
+		}
+
 	}
 
 	Anitmation(player, playerSheet, deltaTime);
