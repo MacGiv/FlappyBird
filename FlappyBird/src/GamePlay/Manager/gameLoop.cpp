@@ -37,7 +37,7 @@ void mainLoop()
 
 	std::list<Pipe::PipeSet> pipeSets = {};
 
-	float spawmTimer = 0;
+	float spawnTimer = 0;
 
 	gameState = Menu::Menus::MainMenu;
 	previousMenu = Menu::Menus::MainMenu;
@@ -53,9 +53,9 @@ void mainLoop()
 
 	while (!WindowShouldClose() && gameState != Menu::Menus::Exit)
 	{
-		update(pause, spawmTimer, pipeSets, sprites, spriteMovement);
+		update(pause, spawnTimer, pipeSets, sprites, spriteMovement);
 
-		draw(texture, sprites, pipeSets, spawmTimer, pause, spriteMovement);
+		draw(texture, sprites, pipeSets, spawnTimer, pause, spriteMovement);
 	}
 
 	close(sprites);
@@ -103,6 +103,7 @@ void update(bool& pause, float& spawmTimer, std::list<Pipe::PipeSet>& pipeSets, 
 		if (IsKeyPressed(KEY_ESCAPE))
 			gameState = Menu::Menus::MainMenu;
 		break;
+
 	case Menu::Menus::Playing:
 
 		previousMenu = Menu::Menus::Playing;
@@ -131,9 +132,9 @@ void update(bool& pause, float& spawmTimer, std::list<Pipe::PipeSet>& pipeSets, 
 				Player::Movement(playerTwo, sprites.playerTwoSheet, deltaTime);
 				Player::AddPoint(playerOne.pos.x, playerOne.points, pipeSets);
 				Player::AddPoint(playerTwo.pos.x, playerOne.points, pipeSets);
-				Player::DidPlayerDied(playerOne, pipeSets);
-				Player::DidPlayerDied(playerTwo, pipeSets);
-				Pipe::Destructor(pipeSets);
+				Player::PlayerPipeCollision(playerOne, pipeSets);
+				Player::PlayerPipeCollision(playerTwo, pipeSets);
+				Pipe::HandleOutOfBounds(pipeSets);
 
 				spriteMovement.sky -= 10 * deltaTime;
 				spriteMovement.backBuildings -= 30.0f * deltaTime;
