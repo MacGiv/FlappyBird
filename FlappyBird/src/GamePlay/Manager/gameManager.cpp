@@ -2,10 +2,9 @@
 
 void GameManager::ResetGame(Player::Player& p1, Player::Player& p2, Texture2D& playerOneSheet, Texture2D& playerTwoSheet, std::list<Pipe::PipeSet>& pipeSets, float& spawnTimer, bool& pause)
 {
-	p1 = Player::Player();
-	p2 = Player::Player();
-	p1.id = 1;
-	p2.id = 2;
+	Player::InitializePlayer(p1, 1);
+	Player::InitializePlayer(p2, 2);
+
 	p1.frameRec = { 0.0f, 0.0f, (float)playerOneSheet.width / 3, (float)playerOneSheet.height };
 	p2.frameRec = { 0.0f, 0.0f, (float)playerOneSheet.width / 3, (float)playerTwoSheet.height };
 

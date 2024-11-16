@@ -3,8 +3,7 @@
 
 void Player::InitializePlayer(Player& player, int id)
 {
-	player.pos = { screenWidth / 5, screenHeight / 2 };
-
+	
 	player.frameRec = {};
 
 	player.velocityY = 0;
@@ -16,6 +15,12 @@ void Player::InitializePlayer(Player& player, int id)
 
 	player.size = 64;
 	player.radius = player.size / 2;
+
+	if (id == 1)
+		player.pos = { screenWidth / 5, screenHeight / 2 };
+	else
+		player.pos = { screenWidth / 5 + player.size, screenHeight / 2 };
+
 
 	player.animate = false;
 	player.collide = false;
@@ -102,7 +107,7 @@ void Player::AddPoint(float posX, int& points, std::list<Pipe::PipeSet>& pipes)
 	}
 }
 
-void Player::DidPlayerDied(Player& player, std::list<Pipe::PipeSet>& pipes)
+void Player::PlayerPipeCollision(Player& player, std::list<Pipe::PipeSet>& pipes)
 {
 	//Rect Circle Collition
 

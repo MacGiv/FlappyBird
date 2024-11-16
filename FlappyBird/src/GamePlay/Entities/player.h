@@ -34,5 +34,5 @@ namespace Player
 	void Movement(Player& player, Texture2D& playerSheet, float deltaTime);
 	void Anitmation(Player& player, Texture2D& playerSheet, float deltaTime);
 	void AddPoint(float posX, int& points, std::list<Pipe::PipeSet>& pipes);
-	void DidPlayerDied(Player& player, std::list<Pipe::PipeSet>& pipes);
+	void PlayerPipeCollision(Player& player, std::list<Pipe::PipeSet>& pipes);
 }
