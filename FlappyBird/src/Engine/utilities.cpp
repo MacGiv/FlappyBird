@@ -17,5 +17,3 @@ bool Tools::CheckMouseButtonCollision(Vector2 mouse, Rectangle button)
 		mouse.y >= button.y &&
 		mouse.y <= button.y + button.height);
 }
-
-//
