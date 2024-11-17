@@ -42,7 +42,7 @@ Pipe::PipeSet Pipe::Creator()
 	return newPipeSet;
 }
 
-void Pipe::Destructor(std::list<PipeSet>& pipeSets)
+void Pipe::HandleOutOfBounds(std::list<PipeSet>& pipeSets)
 {
 	if (!pipeSets.empty())
 	{
