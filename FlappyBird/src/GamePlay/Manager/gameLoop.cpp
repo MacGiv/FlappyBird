@@ -27,6 +27,7 @@ static Menu::Menus gameState;
 static Menu::Menus previousMenu;
 static Player::Player playerOne = {};
 static Player::Player playerTwo = {};
+static bool isSinglePlayer = true;
 
 void mainLoop()
 {
@@ -105,10 +106,12 @@ void update(bool& pause, float& spawmTimer, std::list<Pipe::PipeSet>& pipeSets, 
 		break;
 
 	case Menu::Menus::Playing:
+	case Menu::Menus::PlayingTwo:
 
 		previousMenu = Menu::Menus::Playing;
 
-		if ((!playerOne.collide || !playerTwo.collide) && gameState == Menu::Menus::Playing)
+		if ((!playerOne.collide || !playerTwo.collide) &&
+			gameState == Menu::Menus::Playing || gameState == Menu::Menus::PlayingTwo)
 		{
 			if (IsKeyPressed(KEY_ESCAPE))
 				pause = !pause;
@@ -179,6 +182,7 @@ void draw(const Texture2D& texture,	Sprites::Sprites& sprites, std::list<Pipe::P
 		break;
 
 	case Menu::Menus::Playing:
+	case Menu::Menus::PlayingTwo:
 
 		if (playerOne.collide || playerTwo.collide)
 		{
@@ -188,17 +192,13 @@ void draw(const Texture2D& texture,	Sprites::Sprites& sprites, std::list<Pipe::P
 		}
 		else
 		{
-			// Draw clack background with less opacity
-			if (pause)
-			{
-				Color semiTransparentBlack = { 0, 0, 0, 150 };
-				DrawRectangle(0, 0, static_cast<int>(screenWidth), static_cast<int>(screenHeight), semiTransparentBlack);
-			}
-
 			Drawers::DrawGamePlay(playerOne, playerTwo, pipeSets, sprites, spriteMovement, pause);
 
 			if (pause)
 			{
+				Color semiTransparentBlack = { 0, 0, 0, 150 };
+				DrawRectangle(0, 0, static_cast<int>(screenWidth), static_cast<int>(screenHeight), semiTransparentBlack);
+
 				Drawers::DrawPauseMenu(gameState, GetFontDefault(), pause);
 
 				if (gameState == Menu::Menus::MainMenu)
