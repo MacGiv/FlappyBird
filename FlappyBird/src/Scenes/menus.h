@@ -10,7 +10,9 @@ enum class Menus
 {
 	MainMenu,
 	Playing,
+	PlayingTwo,
 	Rules,
+	HowToPlay,
 	Credits,
 	WantToExit,
 	None,

@@ -115,42 +115,60 @@ void Drawers::DrawGamePlay(Player::Player playerOne, Player::Player playerTwo, s
 
 void Drawers::DrawMainMenu(Menu::Menus& gameState, Font font, Texture2D gamesTitle)
 {
-	const int maxButtons = 5;
+	const int maxButtons = 6;
 	Vector2 mouse;
 	Buttons::Button button[maxButtons] = {};
 
-	float startX = (screenWidth - Buttons::buttonWidth) / 2;
-	float startY = screenHeight - (Buttons::buttonHeight * maxButtons + Buttons::buttonSpacing * (maxButtons - 1));
 
-	for (int i = 0; i < maxButtons; i++)
+	// Posiciones iniciales pa los botones
+	float yBottomSpacing = 60.0f;
+	float startX = (0 + Buttons::buttonWidth /2);
+	float startY = screenHeight - (Buttons::buttonHeight * maxButtons + Buttons::buttonSpacing * (maxButtons - 1) + yBottomSpacing);
+
+	struct ButtonData 
+	{
+		Menu::Menus option;
+		const char* text;
+	};
+
+	ButtonData buttonData[maxButtons] = 
+	{
+		{ Menu::Menus::Playing, "1 Player" },
+		{ Menu::Menus::PlayingTwo, "2 Players" },
+		{ Menu::Menus::Rules, "Rules" },
+		{ Menu::Menus::HowToPlay, "How To Play" },
+		{ Menu::Menus::Credits, "Credits" },
+		{ Menu::Menus::WantToExit, "Exit" }
+	};
+
+	// Configuración de los botones
+	for (int i = 0; i < maxButtons; i++) 
 	{
 		button[i].rect = { startX, startY + i * (Buttons::buttonHeight + Buttons::buttonSpacing), Buttons::buttonWidth, Buttons::buttonHeight };
+		button[i].option = buttonData[i].option;
 	}
-
-	button[0].option = Menu::Menus::Playing;
-	button[1].option = Menu::Menus::Rules;
-	button[2].option = Menu::Menus::Credits;
-	button[3].option = Menu::Menus::WantToExit;
 
 	Color outline = BLACK;
 	mouse = GetMousePosition();
 
-	for (int i = 0; i < maxButtons; i++)
+	// Detección de interacciones del mouse
+	for (int i = 0; i < maxButtons; i++) 
 	{
-		if (Tools::CheckMouseButtonCollision(mouse, button[i].rect))
+		if (Tools::CheckMouseButtonCollision(mouse, button[i].rect)) 
 		{
 			button[i].color = WHITE;
 
-			if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-			{
+			if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
 				button[i].color = YELLOW;
 			}
 
-			if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+			if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
 				gameState = button[i].option;
+			}
 		}
 	}
 
+	// Dibujar texto del título y versión
 	DrawText("v0.4", 0, 0, 20, WHITE);
 
 	DrawTexturePro(
@@ -165,25 +183,10 @@ void Drawers::DrawMainMenu(Menu::Menus& gameState, Font font, Texture2D gamesTit
 		WHITE  // Sin tintes de color
 	);
 
-	for (int i = 0; i < maxButtons; i++)
+	// Dibujar los botones
+	for (int i = 0; i < maxButtons; i++) 
 	{
-		switch (button[i].option)
-		{
-		case Menu::Menus::Playing:
-			Buttons::DrawButton(button[i].rect, "Play", button[i].color, outline, font);
-			break;
-		case Menu::Menus::Rules:
-			Buttons::DrawButton(button[i].rect, "Rules", button[i].color, outline, font);
-			break;
-		case Menu::Menus::Credits:
-			Buttons::DrawButton(button[i].rect, "Credits", button[i].color, outline, font);
-			break;
-		case Menu::Menus::WantToExit:
-			Buttons::DrawButton(button[i].rect, "Exit", button[i].color, outline, font);
-			break;
-		default:
-			break;
-		}
+		Buttons::DrawButton(button[i].rect, buttonData[i].text, button[i].color, outline, font);
 	}
 }
 
