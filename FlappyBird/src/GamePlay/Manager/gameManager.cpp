@@ -4,6 +4,7 @@ void GameManager::ResetGame(Player::Player& p1, Player::Player& p2, Texture2D& p
 {
 	Player::InitializePlayer(p1, 1);
 	Player::InitializePlayer(p2, 2);
+	
 
 	p1.frameRec = { 0.0f, 0.0f, (float)playerOneSheet.width / 3, (float)playerOneSheet.height };
 	p2.frameRec = { 0.0f, 0.0f, (float)playerOneSheet.width / 3, (float)playerTwoSheet.height };
@@ -17,22 +18,9 @@ void GameManager::ResetGame(Player::Player& p1, Player::Player& p2, Texture2D& p
 
 void GameManager::ShouldResetGame(Menu::Menus& gameState, Player::Player& p1, Player::Player& p2, Texture2D& p1Sheet, Texture2D& p2Sheet, std::list<Pipe::PipeSet>& pipeSets, float& spawnTimer, bool& pause)
 {
-	switch (gameState)
+	if (gameState == Menu::Menus::MainMenu || gameState == Menu::Menus::Replay) 
 	{
-	case Menu::Menus::MainMenu:
-
 		GameManager::ResetGame(p1, p2, p1Sheet, p2Sheet, pipeSets, spawnTimer, pause);
-		break;
-
-	case Menu::Menus::Replay:
-
-		GameManager::ResetGame(p1, p2, p1Sheet, p2Sheet, pipeSets, spawnTimer, pause);
-		gameState = Menu::Menus::Playing;
-		break;
-
-	case Menu::Menus::Exit:
-		break;
-	default:
-		break;
+		gameState = Menu::Menus::MainMenu; // Asegura que siempre se reinicia al menú principal
 	}
 }
