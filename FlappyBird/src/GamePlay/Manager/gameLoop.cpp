@@ -232,6 +232,10 @@ void draw(const Texture2D& texture,	Sprites::Sprites& sprites, std::list<Pipe::P
 
 		Drawers::DrawConfirmExit(gameState, GetFontDefault(), previousMenu);
 		break;
+	case Menu::Menus::HowToPlay:
+
+		Drawers::DrawHowToPlay(gameState, GetFontDefault());
+		break;
 
 	default:
 		break;
