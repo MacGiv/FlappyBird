@@ -7,7 +7,7 @@
 namespace Buttons
 {
 
-const float buttonWidth = 200;
+const float buttonWidth = 250;
 const float buttonHeight = 60;
 const float buttonSpacing = 20;
 
