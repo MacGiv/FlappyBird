@@ -108,7 +108,7 @@ void update(bool& pause, float& spawmTimer, std::list<Pipe::PipeSet>& pipeSets, 
 	case Menu::Menus::Playing:
 	case Menu::Menus::PlayingTwo:
 
-		previousMenu = Menu::Menus::Playing;
+		//previousMenu = Menu::Menus::Playing;
 
 		if ((!playerOne.collide || !playerTwo.collide) &&
 			gameState == Menu::Menus::Playing || gameState == Menu::Menus::PlayingTwo)
@@ -131,14 +131,18 @@ void update(bool& pause, float& spawmTimer, std::list<Pipe::PipeSet>& pipeSets, 
 					Pipe::Movement(pipeSetIt, deltaTime);
 				}
 
-				Player::Movement(playerOne, sprites.playerOneSheet, deltaTime);
-				Player::Movement(playerTwo, sprites.playerTwoSheet, deltaTime);
-				Player::AddPoint(playerOne.pos.x, playerOne.points, pipeSets);
-				Player::AddPoint(playerTwo.pos.x, playerOne.points, pipeSets);
-				Player::PlayerPipeCollision(playerOne, pipeSets);
-				Player::PlayerPipeCollision(playerTwo, pipeSets);
 				Pipe::HandleOutOfBounds(pipeSets);
 
+				Player::AddPoint(playerOne.pos.x, playerOne.points, pipeSets);
+				Player::Movement(playerOne, sprites.playerOneSheet, deltaTime);
+				Player::PlayerPipeCollision(playerOne, pipeSets);
+				if (gameState == Menu::Menus::PlayingTwo)
+				{
+					Player::AddPoint(playerTwo.pos.x, playerTwo.points, pipeSets);
+					Player::Movement(playerTwo, sprites.playerTwoSheet, deltaTime);
+					Player::PlayerPipeCollision(playerTwo, pipeSets);
+				}
+				
 				spriteMovement.sky -= 10 * deltaTime;
 				spriteMovement.backBuildings -= 30.0f * deltaTime;
 				spriteMovement.frontBuildings -= 50.0f * deltaTime;
@@ -160,6 +164,11 @@ void update(bool& pause, float& spawmTimer, std::list<Pipe::PipeSet>& pipeSets, 
 		}
 
 		break;
+	case Menu::Menus::HowToPlay:
+		if (IsKeyPressed(KEY_ESCAPE))
+			gameState = Menu::Menus::MainMenu;
+		break;
+
 
 	default:
 		break;
@@ -192,7 +201,7 @@ void draw(const Texture2D& texture,	Sprites::Sprites& sprites, std::list<Pipe::P
 		}
 		else
 		{
-			Drawers::DrawGamePlay(playerOne, playerTwo, pipeSets, sprites, spriteMovement, pause);
+			Drawers::DrawGamePlay(gameState, playerOne, playerTwo, pipeSets, sprites, spriteMovement, pause);
 
 			if (pause)
 			{
