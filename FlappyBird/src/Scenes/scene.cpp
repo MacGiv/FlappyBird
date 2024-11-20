@@ -174,7 +174,7 @@ void Drawers::DrawMainMenu(Menu::Menus& gameState, Font font, Texture2D gamesTit
 	}
 
 	// Dibujar texto del título y versión
-	DrawText("v0.4", 0, 0, 20, WHITE);
+	DrawText("v1.0", 0, 0, 20, WHITE);
 
 	DrawTexturePro(
 		gamesTitle,
