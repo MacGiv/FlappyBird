@@ -21,6 +21,6 @@ void GameManager::ShouldResetGame(Menu::Menus& gameState, Player::Player& p1, Pl
 	if (gameState == Menu::Menus::MainMenu || gameState == Menu::Menus::Replay) 
 	{
 		GameManager::ResetGame(p1, p2, p1Sheet, p2Sheet, pipeSets, spawnTimer, pause);
-		gameState = Menu::Menus::MainMenu; // Asegura que siempre se reinicia al menú principal
+		gameState = Menu::Menus::MainMenu; 
 	}
 }

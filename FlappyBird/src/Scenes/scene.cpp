@@ -112,7 +112,7 @@ void Drawers::DrawGamePlay(Menu::Menus gameState, Player::Player playerOne, Play
 
 		DrawText(text.c_str(), 0, 0, 20, RAYWHITE);
 
-		text = "PipeSet Count: " + std::to_string(pipeSets.size());
+		text = "Press ESC to pause " + std::to_string(pipeSets.size());
 
 		DrawText(text.c_str(), static_cast<int>(screenWidth) - MeasureText(text.c_str(), 20), 0, 20, RAYWHITE);
 	}
