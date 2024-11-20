@@ -10,7 +10,7 @@
 #include "GamePlay/Entities/player.h"
 #include "GamePlay/Entities/pipe.h"
 
-void Drawers::DrawGamePlay(Player::Player playerOne, Player::Player playerTwo, std::list<Pipe::PipeSet>& pipeSets, Sprites::Sprites& sprites, Sprites::SpriteMovement spriteMovement, bool pause)
+void Drawers::DrawGamePlay(Menu::Menus gameState, Player::Player playerOne, Player::Player playerTwo, std::list<Pipe::PipeSet>& pipeSets, Sprites::Sprites& sprites, Sprites::SpriteMovement spriteMovement, bool pause)
 {
 
 	Vector2 origin = { 0.0f, 0.0f };
@@ -54,16 +54,21 @@ void Drawers::DrawGamePlay(Player::Player playerOne, Player::Player playerTwo, s
 		0,
 		WHITE);
 	
-	playerTwo.pos.x += sprites.playerTwoSheet.width / 2;
-	playerTwo.pos.y += sprites.playerTwoSheet.height / 2;
+	if (gameState == Menu::Menus::PlayingTwo)
+	{
+		playerTwo.pos.x += sprites.playerTwoSheet.width / 2;
+		playerTwo.pos.y += sprites.playerTwoSheet.height / 2;
 
-	DrawTexturePro(
-		sprites.playerTwoSheet,
-		playerTwo.frameRec,
-		Rectangle{ playerTwo.pos.x - playerTwo.size / 2, playerTwo.pos.y - playerTwo.size / 2, playerTwo.size, playerTwo.size },
-		Vector2{ static_cast<float>(sprites.playerTwoSheet.width) / 2, static_cast<float>(sprites.playerTwoSheet.height) / 2 },
-		0,
-		WHITE);
+		DrawTexturePro(
+			sprites.playerTwoSheet,
+			playerTwo.frameRec,
+			Rectangle{ playerTwo.pos.x - playerTwo.size / 2, playerTwo.pos.y - playerTwo.size / 2, playerTwo.size, playerTwo.size },
+			Vector2{ static_cast<float>(sprites.playerTwoSheet.width) / 2, static_cast<float>(sprites.playerTwoSheet.height) / 2 },
+			0,
+			WHITE);
+	}
+
+	
 
 	for (Pipe::PipeSet pipeSetIt : pipeSets)
 	{
@@ -539,6 +544,51 @@ void Drawers::DrawConfirmExit(Menu::Menus& gameState, Font font, Menu::Menus pre
 		default:
 			break;
 		}
+	}
+}
+
+void Drawers::DrawHowToPlay(Menu::Menus& gameState, Font font)
+{
+	float newTextFontSize = 25.0f;
+	float newTitleFontSize = 30.0f;
+
+	// Configuración de posiciones del texto
+	Vector2 titlePos = {
+		static_cast<float>(screenWidth) / 2 - MeasureTextEx(font, "How To Play", newTitleFontSize, 2).x / 2,
+		static_cast<float>(screenHeight) / 10
+	};
+
+	Vector2 instructionsPos = {
+		static_cast<float>(screenWidth) / 2 - MeasureTextEx(font, "Avoid pipes and stay alive!", newTextFontSize, 2).x / 2,
+		titlePos.y + newTitleFontSize + 20
+	};
+
+	Vector2 playerOneControlsPos = {
+		static_cast<float>(screenWidth) / 2 - MeasureTextEx(font, "Player 1: Press SPACE to jump.", newTextFontSize, 2).x / 2,
+		instructionsPos.y + newTextFontSize + 30
+	};
+
+	Vector2 playerTwoControlsPos = {
+		static_cast<float>(screenWidth) / 2 - MeasureTextEx(font, "Player 2: Press UP ARROW to jump.", newTextFontSize, 2).x / 2,
+		playerOneControlsPos.y + newTextFontSize + 30
+	};
+
+	Vector2 backToMenuPos = {
+		static_cast<float>(screenWidth) / 2 - MeasureTextEx(font, "Press ESC to return to menu.", newTextFontSize, 2).x / 2,
+		static_cast<float>(screenHeight) - 60
+	};
+
+	// Dibujar texto
+	DrawTextEx(font, "How To Play", titlePos, newTitleFontSize, 2, RAYWHITE);
+	DrawTextEx(font, "Avoid pipes and stay alive!", instructionsPos, newTextFontSize, 2, RAYWHITE);
+	DrawTextEx(font, "Player 1: Press SPACE to jump.", playerOneControlsPos, newTextFontSize, 2, RAYWHITE);
+	DrawTextEx(font, "Player 2: Press UP ARROW to jump.", playerTwoControlsPos, newTextFontSize, 2, RAYWHITE);
+	DrawTextEx(font, "Press ESC to return to menu.", backToMenuPos, newTextFontSize, 2, GRAY);
+
+	// Detectar si se presiona ESC para volver al menú
+	if (IsKeyPressed(KEY_ESCAPE))
+	{
+		gameState = Menu::Menus::MainMenu;
 	}
 }
 
