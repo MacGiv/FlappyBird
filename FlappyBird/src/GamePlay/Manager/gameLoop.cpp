@@ -28,6 +28,9 @@ static Menu::Menus previousMenu;
 static Player::Player playerOne = {};
 static Player::Player playerTwo = {};
 static bool isSinglePlayer = true;
+static Music menuMusic;
+static Music gameplayMusic;
+static Texture2D backgroundTexture;
 
 void mainLoop()
 {
@@ -56,7 +59,7 @@ void mainLoop()
 	{
 		update(pause, spawnTimer, pipeSets, sprites, spriteMovement);
 
-		draw(texture, sprites, pipeSets, spawnTimer, pause, spriteMovement);
+		draw(backgroundTexture, sprites, pipeSets, spawnTimer, pause, spriteMovement);
 	}
 
 	close(sprites);
@@ -64,6 +67,21 @@ void mainLoop()
 
 void initGame(Sprites::Sprites& sprites)
 {
+	InitAudioDevice();
+	menuMusic = LoadMusicStream("res/main_menu_music.mp3");
+	gameplayMusic = LoadMusicStream("res/gameplay_music.mp3");
+	SetMusicVolume(menuMusic, 0.5f);
+	menuMusic.looping = true;
+	SetMusicVolume(gameplayMusic, 0.5f);
+	gameplayMusic.looping = true;
+
+	//backgroundTexture = LoadTexture("res/menu_img.png");
+
+	if (!IsMusicStreamPlaying(menuMusic))
+	{
+		PlayMusicStream(menuMusic);
+	}
+
 	
 
 #pragma warning(disable:4244)
@@ -90,6 +108,10 @@ void update(bool& pause, float& spawmTimer, std::list<Pipe::PipeSet>& pipeSets, 
 
 		if (IsKeyPressed(KEY_ESCAPE))
 			gameState = Menu::Menus::WantToExit;
+
+		
+
+		UpdateMusicStream(menuMusic);
 		break;
 
 	case Menu::Menus::WantToExit:
@@ -108,10 +130,17 @@ void update(bool& pause, float& spawmTimer, std::list<Pipe::PipeSet>& pipeSets, 
 	case Menu::Menus::Playing:
 	case Menu::Menus::PlayingTwo:
 
-		//previousMenu = Menu::Menus::Playing;
+		if (IsMusicStreamPlaying(menuMusic)) 
+		{
+			StopMusicStream(menuMusic);
+			PlayMusicStream(gameplayMusic);
+		}
+
+		UpdateMusicStream(gameplayMusic);
 
 		if ((!playerOne.collide || !playerTwo.collide) &&
-			gameState == Menu::Menus::Playing || gameState == Menu::Menus::PlayingTwo)
+			gameState == Menu::Menus::Playing || gameState == Menu::Menus::PlayingTwo
+			)
 		{
 			if (IsKeyPressed(KEY_ESCAPE))
 				pause = !pause;
@@ -163,6 +192,8 @@ void update(bool& pause, float& spawmTimer, std::list<Pipe::PipeSet>& pipeSets, 
 			}
 		}
 
+
+
 		break;
 	case Menu::Menus::HowToPlay:
 		if (IsKeyPressed(KEY_ESCAPE))
@@ -194,6 +225,13 @@ void draw(const Texture2D& texture,	Sprites::Sprites& sprites, std::list<Pipe::P
 	case Menu::Menus::PlayingTwo:
 
 		if (playerOne.collide || playerTwo.collide)
+		{
+			Drawers::DrawGameOver(gameState, GetFontDefault());
+
+			GameManager::ShouldResetGame(gameState, playerOne, playerTwo, sprites.playerOneSheet, sprites.playerTwoSheet, pipeSets, spawmTimer, pause);
+		}
+		else if (playerOne.pos.y + playerOne.radius >= screenHeight ||
+			(gameState == Menu::Menus::PlayingTwo && playerTwo.pos.y + playerTwo.radius >= screenHeight))
 		{
 			Drawers::DrawGameOver(gameState, GetFontDefault());
 
@@ -246,6 +284,11 @@ void draw(const Texture2D& texture,	Sprites::Sprites& sprites, std::list<Pipe::P
 
 void close(Sprites::Sprites& sprites)
 {
+	UnloadMusicStream(menuMusic);
+	UnloadMusicStream(gameplayMusic);
+	CloseAudioDevice();
+	//UnloadTexture(backgroundTexture);
+
 	Sprites::unloadSprites(sprites);
 
 	CloseWindow();
