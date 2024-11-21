@@ -18,7 +18,7 @@ static void initGame(Sprites::Sprites& sprites);
 
 static void update(bool& pause, float& spawmTimer, std::list<Pipe::PipeSet>& pipeSets, Sprites::Sprites& sprites, Sprites::SpriteMovement& spriteMovement);
 
-static void draw(const Texture2D& texture, Sprites::Sprites& sprites, std::list<Pipe::PipeSet>& pipeSets, float& spawmTimer, bool& pause,
+static void draw(Texture2D& texture, Sprites::Sprites& sprites, std::list<Pipe::PipeSet>& pipeSets, float& spawmTimer, bool& pause,
 	const Sprites::SpriteMovement& spriteMovement);
 
 static void close(Sprites::Sprites& sprites);
@@ -30,7 +30,7 @@ static Player::Player playerTwo = {};
 static bool isSinglePlayer = true;
 static Music menuMusic;
 static Music gameplayMusic;
-static Texture2D backgroundTexture;
+static Texture2D titleTexture;
 
 void mainLoop()
 {
@@ -46,8 +46,6 @@ void mainLoop()
 	gameState = Menu::Menus::MainMenu;
 	previousMenu = Menu::Menus::MainMenu;
 
-	Texture2D texture = {};
-
 	Sprites::Sprites sprites = {};
 	Sprites::SpriteMovement spriteMovement = {};
 	
@@ -59,7 +57,7 @@ void mainLoop()
 	{
 		update(pause, spawnTimer, pipeSets, sprites, spriteMovement);
 
-		draw(backgroundTexture, sprites, pipeSets, spawnTimer, pause, spriteMovement);
+		draw(titleTexture, sprites, pipeSets, spawnTimer, pause, spriteMovement);
 	}
 
 	close(sprites);
@@ -67,6 +65,12 @@ void mainLoop()
 
 void initGame(Sprites::Sprites& sprites)
 {
+#pragma warning(disable:4244)
+	srand(time(NULL));
+#pragma warning(default:4244)
+
+	InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), "Flappy Bird");
+	
 	InitAudioDevice();
 	menuMusic = LoadMusicStream("res/main_menu_music.mp3");
 	gameplayMusic = LoadMusicStream("res/gameplay_music.mp3");
@@ -75,22 +79,15 @@ void initGame(Sprites::Sprites& sprites)
 	SetMusicVolume(gameplayMusic, 0.5f);
 	gameplayMusic.looping = true;
 
-	//backgroundTexture = LoadTexture("res/menu_img.png");
 
 	if (!IsMusicStreamPlaying(menuMusic))
 	{
 		PlayMusicStream(menuMusic);
 	}
 
-	
-
-#pragma warning(disable:4244)
-	srand(time(NULL));
-#pragma warning(default:4244)
-
-	InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), "Flappy Bird");
-
 	Sprites::initSprites(sprites);
+
+	titleTexture = LoadTexture("res/menu_img.png");
 
 	playerOne.frameRec = { 0.0f, 0.0f, (float)sprites.playerOneSheet.width / 3, (float)sprites.playerOneSheet.height };
 
@@ -108,8 +105,6 @@ void update(bool& pause, float& spawmTimer, std::list<Pipe::PipeSet>& pipeSets, 
 
 		if (IsKeyPressed(KEY_ESCAPE))
 			gameState = Menu::Menus::WantToExit;
-
-		
 
 		UpdateMusicStream(menuMusic);
 		break;
@@ -207,7 +202,7 @@ void update(bool& pause, float& spawmTimer, std::list<Pipe::PipeSet>& pipeSets, 
 }
 
 
-void draw(const Texture2D& texture,	Sprites::Sprites& sprites, std::list<Pipe::PipeSet>& pipeSets, float& spawmTimer, bool& pause,
+void draw(Texture2D& texture,	Sprites::Sprites& sprites, std::list<Pipe::PipeSet>& pipeSets, float& spawmTimer, bool& pause,
 	const Sprites::SpriteMovement& spriteMovement)
 {
 	BeginDrawing();
@@ -287,7 +282,7 @@ void close(Sprites::Sprites& sprites)
 	UnloadMusicStream(menuMusic);
 	UnloadMusicStream(gameplayMusic);
 	CloseAudioDevice();
-	//UnloadTexture(backgroundTexture);
+	UnloadTexture(titleTexture);
 
 	Sprites::unloadSprites(sprites);
 

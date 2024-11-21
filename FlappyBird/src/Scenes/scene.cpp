@@ -118,8 +118,9 @@ void Drawers::DrawGamePlay(Menu::Menus gameState, Player::Player playerOne, Play
 	}
 }
 
-void Drawers::DrawMainMenu(Menu::Menus& gameState, Font font, Texture2D gamesTitle)
+void Drawers::DrawMainMenu(Menu::Menus& gameState, Font font, Texture2D titleTexture)
 {
+	ClearBackground(DARKGRAY);
 	const int maxButtons = 6;
 	Vector2 mouse;
 	Buttons::Button button[maxButtons] = {};
@@ -173,19 +174,33 @@ void Drawers::DrawMainMenu(Menu::Menus& gameState, Font font, Texture2D gamesTit
 		}
 	}
 
-	// Dibujar texto del título y versión
+	// Dibujar texto de version
 	DrawText("v1.0", 0, 0, 20, WHITE);
 
+
+
+	// Dibujar Titulo
+	float scale = std::min(
+		static_cast<float>(GetScreenWidth()) / titleTexture.width,
+		static_cast<float>(GetScreenHeight()) / titleTexture.height
+	);
+
+	// Calcular las dimensiones escaladas
+	float scaledWidth = (titleTexture.width * scale)-70;
+	float scaledHeight = titleTexture.height * scale;
+
+	// Posicionar en el centro de la mitad derecha de la pantalla
+	float destX = GetScreenWidth() / 2 + (GetScreenWidth() / 4) - (scaledWidth / 2); // Mitad derecha, centrado
+	float destY = (GetScreenHeight() / 2) - (scaledHeight / 2);                 // Centrado verticalmente
+
+	// Dibujar la textura escalada en la posición calculada
 	DrawTexturePro(
-		gamesTitle,
-		Rectangle{ 0, 0, static_cast<float>(gamesTitle.width), static_cast<float>(gamesTitle.height) },  // Fuente: toda la imagen original
-		Rectangle{ static_cast<float>(screenWidth) / 2 - gamesTitle.width / 2,  // Posición X centrada
-				   static_cast<float>(screenHeight) / 3 - gamesTitle.height / 2,  // Posición Y centrada
-				   static_cast<float>(gamesTitle.width),  // Ancho del título
-				   static_cast<float>(gamesTitle.height) },  // Altura del título
-		Vector2{ 0, 0 },  // Offset del centro
-		0.0f,  // Sin rotación
-		WHITE  // Sin tintes de color
+		titleTexture,
+		Rectangle{ 0, 0, static_cast<float>(titleTexture.width), static_cast<float>(titleTexture.height) }, // Fuente completa
+		Rectangle{ destX, destY, scaledWidth, scaledHeight },                                              // Destino ajustado
+		Vector2{ 0, 0 },  // Sin desplazamiento
+		0.0f,             // Sin rotación
+		WHITE              // Sin tintes
 	);
 
 	// Dibujar los botones
