@@ -18,4 +18,22 @@ Autor original de este repositorio: https://github.com/LucioPiccioni
 
 Itch.io: https://macgivdev.itch.io/flappynight
 
+Creditos:
+
+Programadores:
+
+Lucio Piccioni - https://kapnack.itch.io/
+
+Tomas Luchelli - https://macgivdev.itch.io/
+
+Arte:
+
+Waters.Create - https://waterscreate.itch.io/city-background-parallax
+
+Musica:
+Creada por mi usando Suno - https://suno.com/
+https://suno.com/song/4b54e663-dceb-4d23-b683-c9f98826c1ad
+
+https://suno.com/song/218aba92-a0f6-4562-8849-d3d61859776c
+
 Raylib Library: https://www.raylib.com by Ramon Santamaria (@raysan5)
